@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Jokenpô</title>
+
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <script src="https://kit.fontawesome.com/4386879e19.js" crossorigin="anonymous"></script>
+
+    <style>
+      .caixa {
+        width: 400px;
+        height: 250px;
+        border: solid 1px #000;
+        padding: 20px;
+        background-color: #2E2E2E;
+        border-radius: 10px;
+        box-shadow: 1px 1px 5px #000;
+      }
+
+      .caixa2 {
+        width: 60px;
+        height: 60px;
+      }
+
+      /* Extra small devices (portrait phones, less than 576px) */
+      @media (max-width: 575.98px) { 
+        .caixa {
+          height: 250px;
+          width: 100%;
+          border: solid 1px #000;
+          background-color: #2E2E2E;
+          border-radius: 10px;
+          box-shadow: 1px 1px 5px #000;
+        }
+
+        .caixa2 {
+          width: 100px;
+          height: 100px;
+        }
+      }
+
+      /* Small devices (landscape phones, 576px and up) */
+      @media (min-width: 576px) and (max-width: 767.98px) { 
+        .caixa {
+        height: 250px;
+        width: 100%;
+        border: solid 1px #000;
+        background-color: #2E2E2E;
+        border-radius: 10px;
+        box-shadow: 1px 1px 5px #000;
+      }
+      }
+
+      /* Medium devices (tablets, 768px and up) */
+      @media (min-width: 768px) and (max-width: 991.98px) { 
+        
+      }
+
+      /* Large devices (desktops, 992px and up) */
+      @media (min-width: 992px) and (max-width: 1199.98px) {
+        
+      }
+
+      /* Extra large devices (large desktops, 1200px and up) */
+      @media (min-width: 1200px) {
+        
+      }
+    </style>
+	</head>
+
+  <body style="background: #D9D9D9">
+
+    <div class="container pt-4">
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+
+          <div id='display' class="caixa">
+            <h1 class="text-light text-center">Jokenpo</h1>
+
+            <div class="row text-warning justify-content-center">
+              <p>selecione sua opção:</p>              
+            </div>
+
+            <div class="row justify-content-center mb-3">
+              
+              <button   class="btn btn-outline-light bt-lg mx-2" 
+                        type='button' 
+                        id='rock' 
+                        onclick="modificaClasse('rock')">
+                <i class="fa-regular fa-hand-back-fist fa-3x"></i>
+              </button>
+              
+              <button   class="btn btn-outline-light bt-lg mx-2" 
+                        type='button' 
+                        id='paper'
+                        onclick="modificaClasse('paper')">
+                <i class="fa-regular fa-hand fa-3x"></i>
+              </button>
+              
+              <button   class="btn btn-outline-light bt-lg mx-2" 
+                        type='button' 
+                        id='scissor'
+                        onclick="modificaClasse('scissor')">
+                <i class="fa-regular fa-hand-scissors fa-3x"></i>
+              </button>
+            </div>
+
+            <div class="row">
+              <button   class='btn btn-block btn-lg btn-warning mx-auto'
+                        type='button'
+                        id='jogar'
+                        onclick="jogar()"> 
+                Jogar! 
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-12 d-flex justify-content-center">
+          <div id='resultado' class='caixa' style='display: none;'>
+               
+            <h1 id='displayResultado' class="text-warning text-center mb-3"></h1>
+            
+            <div class="row justify-content-around mb-2">
+              <div class="text-light font-weight-bold">You</div>
+              <div class="text-light"></div>
+              <div class="text-light font-weight-bold">PC</div>
+            </div>
+
+            <div class="row mb-3 justify-content-around">
+              <div id='you' class="btn btn-light"></div>
+              <div class="text-light"><i class="fa-solid fa-xmark fa-3x"></i></div>
+              <div id='opp' class="btn btn-light"></div>
+            </div>
+
+            <div class="row">
+              <button onclick='hideDiv()' class="btn btn-block btn-lg btn-warning">Jogar novamente!</button>
+            </div>
+          </div>
+        </div>
+        
+
+      </div>
+    </div> 
+
+    <script type="text/javascript">
+        
+      var valor
+      var opp
+      var result
+
+      function modificaClasse(id) {
+        document.getElementById('paper').classList.remove('active')
+        document.getElementById('scissor').classList.remove('active')
+        document.getElementById('rock').classList.remove('active')
+
+
+        switch (id) {
+          case 'rock' :
+            valor = id;
+            document.getElementById('rock').className += ' active'
+          break
+
+          case 'paper' :
+            valor = id;
+            document.getElementById('paper').className += ' active'
+          break
+
+          case 'scissor' :
+            valor = id;
+            document.getElementById('scissor').className += ' active'
+          break
+        }
+      }
+
+      function jogar() {
+
+        opp = 3*Math.random()
+
+        if (opp <= 1) {
+          opp = 'rock'
+          document.getElementById('opp').innerHTML = '<i class="fa-regular fa-hand-back-fist fa-3x"></i>'
+        } else if (opp <= 2) {
+          opp = 'paper'
+          document.getElementById('opp').innerHTML = '<i class="fa-regular fa-hand fa-3x"></i>'
+        } else if (opp <= 3) {
+          opp = 'scissor'
+          document.getElementById('opp').innerHTML = '<i class="fa-regular fa-hand-scissors fa-3x"></i>'
+        }
+
+        if (valor === undefined) {
+          alert('Selecione uma opção')
+          return
+        } 
+
+        // console.log(valor, opp)
+
+        if (valor === 'rock') {
+          document.getElementById('you').innerHTML = '<i class="fa-regular fa-hand-back-fist fa-3x"></i>'
+          if (opp === 'rock') {
+            result = 'Empate!'
+          } else if (opp === 'paper') {
+            result = 'Perdeu!'
+          } else if (opp === 'scissor') {
+            result = 'Ganhou!'
+          }
+        } else if (valor === 'paper') {      
+          document.getElementById('you').innerHTML = '<i class="fa-regular fa-hand fa-3x"></i>'
+          if (opp === 'rock') {
+            result = 'Ganhou!'
+          } else if (opp === 'paper') {
+            result = 'Empate!'
+          } else if (opp === 'scissor') {
+            result = 'Perdeu!'
+          }
+        } else if (valor === 'scissor') {
+          document.getElementById('you').innerHTML = '<i class="fa-regular fa-hand-scissors fa-3x"></i>'
+          if (opp === 'rock') {
+            result = 'Perdeu!'
+          } else if (opp === 'paper') {
+            result = 'Ganhou!'
+          } else if (opp === 'scissor') {
+            result = 'Empatou!'
+          }
+        }
+
+        document.getElementById('displayResultado').innerHTML = result
+        console.log(valor, opp, result)
+
+        hideDiv()
+      }
+
+      function hideDiv() {
+        targetDiv1 = document.getElementById('resultado')
+        targetDiv2 = document.getElementById('display')
+        if (targetDiv1.style.display !== "none") {
+          targetDiv1.style.display = "none";
+          targetDiv2.style.display = "block";
+        } else {
+          targetDiv1.style.display = "block";
+          targetDiv2.style.display = "none";
+        }
+
+      }
+
+    </script>
+
+
+  </body>	
+
+</html>
